@@ -46,7 +46,7 @@ if __name__ == "__main__":
 
     for map_file_path in map_file_paths:
         if check(map_file_path): continue
-        output_name = "tmp_file" + args.seed
+        output_name = "tmp_file_first" + args.seed
         run_args = ["./" + args.TYMPath, "-i", map_file_path, "-o", output_name]
         time_out = False
         try:
@@ -59,29 +59,20 @@ if __name__ == "__main__":
             tym_time = result["statistics"]['runtime']
             try:
                 tym_ta_runtime = result["statistics"]['TA_runtime']
-                tym_avg_next_ta_time = result["statistics"]['TA_gen_time']
                 tym_lowlevel_search_time = result["statistics"]['lowlevel_search_time']
-                tym_lowlevel_queue_time = result["statistics"]['lowlevel_queue_time']
-                tym_create_low_level_node_time = result["statistics"]['create_low_level_node_time']
             except :
                 tym_ta_runtime = 0
-                tym_avg_next_ta_time = 0
                 tym_lowlevel_search_time = 0
-                tym_lowlevel_queue_time = 0
-                tym_create_low_level_node_time = 0
             tym_cost = result["statistics"]['cost']
             tym_ta_times = result["statistics"]['numTaskAssignments']
         else :
             tym_cost = "tym_Time_out"
             tym_time = "tym_Time_out"
             tym_ta_runtime = "tym_Time_out"
-            tym_avg_next_ta_time = "tym_Time_out"
             tym_lowlevel_search_time = "tym_Time_out"
-            tym_lowlevel_queue_time = "tym_Time_out"
-            tym_create_low_level_node_time = "tym_Time_out"
             tym_ta_times = "tym_Time_out"
 
-        output_name = "tmp_file" + args.seed
+        output_name = "tmp_file_second" + args.seed
         run_args = ["./" + args.CBSTAPath, "-i", map_file_path, "-o", output_name]
         time_out = False
         try:
@@ -93,18 +84,10 @@ if __name__ == "__main__":
                 result = yaml.safe_load(output_file)
             try:
                 cbs_ta_runtime = result["statistics"]['TA_runtime']
-                cbsta_avg_next_ta_time = result["statistics"]['TA_gen_time']
                 cbsta_lowlevel_search_time = result["statistics"]['lowlevel_search_time']
-                cbsta_lowlevel_queue_time = result["statistics"]['lowlevel_queue_time']
-                cbsta_create_low_level_node_time = result["statistics"]['create_low_level_node_time']
-                d_cost = result["statistics"]['d_cost']
             except :
                 cbs_ta_runtime = 0
-                cbsta_avg_next_ta_time = 0
                 cbsta_lowlevel_search_time = 0
-                cbsta_lowlevel_queue_time = 0
-                cbsta_create_low_level_node_time = 0
-                d_cost = 0
             cbsta_time = result["statistics"]['runtime']
             cbsta_cost = result["statistics"]['cost']
             cbsta_ta_times = result["statistics"]['numTaskAssignments']
@@ -114,14 +97,14 @@ if __name__ == "__main__":
                 print(test_name, tym_time, tym_cost, cbsta_time, cbsta_cost, "FALSE", flush=True)
                 continue
             print(test_name,
-                  tym_ta_runtime, tym_lowlevel_search_time, tym_lowlevel_queue_time, tym_create_low_level_node_time, tym_avg_next_ta_time, tym_time,
-                  cbs_ta_runtime, cbsta_lowlevel_search_time, cbsta_lowlevel_queue_time, cbsta_create_low_level_node_time, cbsta_avg_next_ta_time, cbsta_time,
-                  cbsta_cost, d_cost, tym_ta_times, cbsta_ta_times, lowLevelNode, flush=True)
+                  tym_ta_runtime, tym_lowlevel_search_time, tym_time,
+                  cbs_ta_runtime, cbsta_lowlevel_search_time, cbsta_time,
+                  cbsta_cost, tym_ta_times, cbsta_ta_times, lowLevelNode, flush=True)
         else :
             test_name = os.path.basename(map_file_path)
             print(test_name,
-                  tym_ta_runtime, tym_lowlevel_search_time, tym_lowlevel_queue_time, tym_create_low_level_node_time, tym_avg_next_ta_time, tym_time,
-                  "cbsta_Time_out", "cbsta_Time_out", "cbsta_Time_out", "cbsta_Time_out",  "cbsta_Time_out", "cbsta_Time_out",
+                  tym_ta_runtime, tym_lowlevel_search_time, tym_time,
+                  "cbsta_Time_out", "cbsta_Time_out", "cbsta_Time_out",
                   tym_cost, flush=True)
         #
 
