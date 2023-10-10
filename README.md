@@ -56,3 +56,8 @@ python3 ../test/test_next_best_assignment.py TestNextBestAssignment.test_1by2
 ./ecbs -i ../benchmark/32x32_obst204/map_32by32_obst204_agents10_ex1.yaml -o output.yaml -w 1.3
 python3 ../example/visualize.py ../benchmark/32x32_obst204/map_32by32_obst204_agents10_ex1.yaml output.yaml
 ````
+
+
+
+Thank @MinakoOikawa (twitter id) for providing the correct dynamic hungarian implementation.
+
